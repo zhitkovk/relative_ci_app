@@ -36,6 +36,7 @@ app_ui = ui.page_fluid(
     ui.layout_sidebar(
         ui.sidebar(
             ui.input_slider("num_sim", "Number of Simulations:", min=100, max=20000, value=1000, step=100),
+            ui.input_slider("sample_size", "Sample size", min=20, max=100000, value=5000, step=50),
             ui.input_numeric("variance_mult", "Variance Multiplier:", value=1.0, min=0.1, max=10, step=0.1),
             ui.input_numeric("lift", "Lift, % for AB test", value=0.1, min=0, max=1, step=0.1),
             ui.input_action_button("run_sim", "Run Simulation", class_="btn-primary"),
@@ -57,8 +58,8 @@ def server(input, output, session):
         pv = []
 
         for i in range(nsim):
-            cnt = norm.rvs(loc=1, scale=base_var, size=10000)
-            trt = norm.rvs(loc=1 * (1 + lift), scale=base_var * variance_multiplier, size=10000)
+            cnt = norm.rvs(loc=1, scale=base_var, size=input.sample_size())
+            trt = norm.rvs(loc=1 * (1 + lift), scale=base_var * variance_multiplier, size=input.sample_size())
 
             zt_result = calculate_ztest(cnt, trt)
             ttest_result = ttest_ind(cnt, trt, equal_var=False)
