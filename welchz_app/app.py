@@ -26,9 +26,9 @@ def calculate_ztest(control, test):
     return effect, zstat, pvalue
 
 def compute_ecdf(data):
-    sorted_data = np.sort(data)
-    y = np.arange(1, len(sorted_data) + 1) / len(sorted_data)
-    return sorted_data, y
+    ta = np.linspace(0, 1, 1000) # theoretical alphas
+    y = [np.mean(data) < x for x in ta]
+    return ta, y
 
 # Define the UI
 app_ui = ui.page_fluid(
