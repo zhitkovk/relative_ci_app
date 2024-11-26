@@ -8,4 +8,4 @@ Z test is usually mentioned either in the context of proportions test for 'big' 
 
 What if we decide to abandon the recomendations and use Z test when the variances are unequal? Is it unsafe to rely on asymptotics?
 
-What question does this note answer? Should you abandon Welch's t-test? The answer is it depends on your data and it is better to carry out simulations for yourself, but in general, judging by the simulations if you expect asymptotic properties to hold, then you can probably just you the z-test.
+Short answer: is double check your own data with simulations.
